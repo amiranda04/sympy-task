@@ -19,8 +19,25 @@ if __name__ == "__main__":
 
 pass
 
-def calcola_integrale_definito(espressione: str, variabile: str, estremo_inf: float, estremo_sup: float) -> sympy.Expr:
-    """Sub-task 2: Calcolare un Integrale Definito."""
+import sympy as sp
+
+def calcola_integrale_definito(espressione: str, variabile: str, estremo_inf: float, estremo_sup: float) -> sp.Expr:
+    espressione = espressione.replace("^", "**")
+    expr = sp.sympify(espressione)
+    var = sp.Symbol(variabile)
+    return sp.integrate(expr, (var, estremo_inf, estremo_sup))
+
+
+# Input utente
+if __name__ == "__main__":
+    espressione = input("Inserisci l'espressione: ")
+    variabile = input("Inserisci la variabile: ")
+    estremo_inf = float(input("Estremo inferiore: "))
+    estremo_sup = float(input("Estremo superiore: "))
+
+    risultato = calcola_integrale_definito(espressione, variabile, estremo_inf, estremo_sup)
+    print("Integrale definito:", risultato)
+
     pass
 
 def calcola_limite(espressione: str, variabile: str, punto: str) -> sympy.Expr:
