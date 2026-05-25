@@ -40,8 +40,25 @@ if __name__ == "__main__":
 
     pass
 
-def calcola_limite(espressione: str, variabile: str, punto: str) -> sympy.Expr:
-    """Sub-task 3: Calcolare un Limite."""
+import sympy as sp
+
+def calcola_limite(espressione: str, variabile: str, punto: str) -> sp.Expr:
+    espressione = espressione.replace("^", "**")
+    expr = sp.sympify(espressione)
+    var = sp.Symbol(variabile)
+    p = sp.sympify(punto)
+    return sp.limit(expr, var, p)
+
+
+if __name__ == "__main__":
+    espressione = input("Inserisci l'espressione: ")
+    variabile = input("Inserisci la variabile: ")
+    punto = input("Inserisci il punto: ")
+
+    risultato = calcola_limite(espressione, variabile, punto)
+
+    # ✅ Stampa elegante
+    print(f"lim_{variabile}→{punto} ({espressione}) = {risultato}")
     pass
 
 def calcola_polinomio_taylor(espressione: str, variabile: str, punto: float, ordine: int) -> sympy.Expr:
