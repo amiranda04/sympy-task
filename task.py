@@ -20,7 +20,6 @@ if __name__ == "__main__":
 pass
 
 import sympy as sp
-
 def calcola_integrale_definito(espressione: str, variabile: str, estremo_inf: float, estremo_sup: float) -> sp.Expr:
     espressione = espressione.replace("^", "**")
     expr = sp.sympify(espressione)
@@ -41,7 +40,6 @@ if __name__ == "__main__":
     pass
 
 import sympy as sp
-
 def calcola_limite(espressione: str, variabile: str, punto: str) -> sp.Expr:
     espressione = espressione.replace("^", "**")
     expr = sp.sympify(espressione)
@@ -57,13 +55,26 @@ if __name__ == "__main__":
 
     risultato = calcola_limite(espressione, variabile, punto)
 
-    # ✅ Stampa elegante
     print(f"lim_{variabile}→{punto} ({espressione}) = {risultato}")
     pass
 
-def calcola_polinomio_taylor(espressione: str, variabile: str, punto: float, ordine: int) -> sympy.Expr:
-    """Sub-task 4: Calcolare una Serie di Taylor."""
-    pass
+import sympy as sp
+def calcola_polinomio_taylor(espressione: str, variabile: str, punto: float, ordine: int) -> sp.Expr:
+    espressione = espressione.replace("^", "**")
+    expr = sp.sympify(espressione)
+    var = sp.Symbol(variabile)
+    return sp.series(expr, var, punto, ordine + 1).removeO()
+
+
+if __name__ == "__main__":
+    espressione = input("Inserisci l'espressione: ")
+    variabile = input("Inserisci la variabile: ")
+    punto = float(input("Inserisci il punto di sviluppo: "))
+    ordine = int(input("Inserisci l'ordine: "))
+
+    risultato = calcola_polinomio_taylor(espressione, variabile, punto, ordine)
+    print(f"Serie di Taylor di {espressione} in {variabile} = {punto} (ordine {ordine}):")
+    print(risultato)
 
 def risolvi_sistema_lineare(eq1: str, eq2: str, var1: str, var2: str) -> Dict[sympy.Symbol, sympy.Expr]:
     """Sub-task 5: Risolvere un Sistema Lineare."""
