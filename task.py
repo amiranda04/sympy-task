@@ -3,9 +3,21 @@ from typing import Dict
 
 # Controlla il file readme.md per i dettagli su ciascun sub-task
 
-def calcola_derivata(espressione: str, variabile: str) -> sympy.Expr:
-    """Sub-task 1: Calcolare una Derivata."""
-    pass
+import sympy as sp
+def calcola_derivata(espressione: str, variabile: str) -> sp.Expr:
+    espressione = espressione.replace("^", "**")  # fix semplice
+    expr = sp.sympify(espressione)
+    var = sp.Symbol(variabile)
+    return sp.diff(expr, var)
+
+
+if __name__ == "__main__":
+    espressione = input("Inserisci l'espressione: ")
+    variabile = input("Inserisci la variabile: ")
+
+    print("Derivata:", calcola_derivata(espressione, variabile))
+
+pass
 
 def calcola_integrale_definito(espressione: str, variabile: str, estremo_inf: float, estremo_sup: float) -> sympy.Expr:
     """Sub-task 2: Calcolare un Integrale Definito."""
